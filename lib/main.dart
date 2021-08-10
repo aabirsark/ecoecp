@@ -8,12 +8,12 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Hive.initFlutter();
+  await Hive.initFlutter();
   Hive.registerAdapter<EcoEcpData>(EcoEcpDataAdapter());
-  Hive.openBox<EcoEcpData>(boxName);
+  await Hive.openBox<EcoEcpData>(boxName);
 
   runApp(MultiProvider(
       providers: [ChangeNotifierProvider(create: (ctx) => MyProvider())],

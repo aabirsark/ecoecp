@@ -1,14 +1,15 @@
 import 'package:ecoecp/core/my_provider.dart';
 import 'package:ecoecp/utils/constants.dart';
+import 'package:ecoecp/utils/crud.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:ecoecp/extension/ext.dart';
 
 class AddData extends StatefulWidget {
   const AddData({Key? key}) : super(key: key);
-
   @override
   State<AddData> createState() => _AddDataState();
 }
@@ -19,15 +20,15 @@ class _AddDataState extends State<AddData> {
   final TextEditingController controller = TextEditingController();
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   child: const Icon(Icons.done),
-      //   backgroundColor: Colors.green,
-      //   foregroundColor: Colors.white,
-      // ),
       bottomNavigationBar: Row(
         children: [
           Container(
@@ -38,13 +39,21 @@ class _AddDataState extends State<AddData> {
                 child: Text(
               "Add Expense",
             )),
-          ),
+          ).inkTap(() {
+            CRUDoperation.addData(int.parse(controller.text), isExp: true);
+            controller.clear();
+            context.read<MyProvider>().setVal(0);
+          }),
           Container(
             width: MediaQuery.of(context).size.width * .5,
             height: 50,
             color: Colors.green,
             child: const Center(child: Text("Add Earning")),
-          ),
+          ).inkTap(() {
+            CRUDoperation.addData(int.parse(controller.text));
+            controller.clear();
+            context.read<MyProvider>().setVal(0);
+          }),
         ],
       ),
       appBar: AppBar(
