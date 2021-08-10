@@ -10,4 +10,8 @@ class CRUDoperation {
     Box box = Boxes.getBox();
     box.add(data);
   }
+
+  static delData(EcoEcpData data) {
+    data.delete();
+  }
 }

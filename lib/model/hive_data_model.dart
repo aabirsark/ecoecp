@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'hive_data_model.g.dart';
 
 @HiveType(typeId: 0)
-class EcoEcpData {
+class EcoEcpData extends HiveObject {
   /// Price is what user add for expense or earning
   @HiveField(0)
   int? price;

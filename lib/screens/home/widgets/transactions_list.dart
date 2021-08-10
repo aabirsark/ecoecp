@@ -2,6 +2,7 @@ import 'package:ecoecp/model/hive_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:intl/intl.dart';
+import 'package:ecoecp/extension/ext.dart';
 
 class TransactionListView extends StatelessWidget {
   const TransactionListView({Key? key, required this.list}) : super(key: key);
@@ -12,6 +13,7 @@ class TransactionListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: list.length,
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(8.0),
         itemBuilder: (ctx, index) {
           EcoEcpData data = list.elementAt(index);
@@ -39,7 +41,7 @@ class TransactionListView extends StatelessWidget {
                   leading: CircleAvatar(
                       radius: 10,
                       backgroundColor: data.isExp ? Colors.red : Colors.green),
-                )),
+                )).dismiss(Key(data.dateTime.toString()), data),
           );
         });
   }
