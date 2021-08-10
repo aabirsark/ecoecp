@@ -41,7 +41,7 @@ class TransactionListView extends StatelessWidget {
                   leading: CircleAvatar(
                       radius: 10,
                       backgroundColor: data.isExp ? Colors.red : Colors.green),
-                )).dismiss(Key(data.dateTime.toString()), data),
+                )).dismiss(UniqueKey(), data),
           );
         });
   }

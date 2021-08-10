@@ -1,7 +1,11 @@
+import 'package:ecoecp/model/hive_data_model.dart';
+import 'package:ecoecp/utils/conversion.dart';
 import 'package:flutter/material.dart';
 
 class SavingsCard extends StatelessWidget {
-  const SavingsCard({Key? key}) : super(key: key);
+  SavingsCard({Key? key, required this.ecoList}) : super(key: key);
+
+  List<EcoEcpData> ecoList;
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +21,25 @@ class SavingsCard extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
+          children: [
+            const Text(
               "Savings",
               style: TextStyle(fontSize: 12, color: Colors.white24),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
-              "10000",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+              Conversion.saved(ecoList).toString(),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Divider(),
-            ExpSpenCard()
+            const Divider(),
+            ExpSpenCard(
+              ecoList: ecoList,
+            )
           ],
         ),
       ),
@@ -42,9 +48,12 @@ class SavingsCard extends StatelessWidget {
 }
 
 class ExpSpenCard extends StatelessWidget {
-  const ExpSpenCard({
+  ExpSpenCard({
     Key? key,
+    required this.ecoList,
   }) : super(key: key);
+
+  List<EcoEcpData> ecoList;
 
   @override
   Widget build(BuildContext context) {
@@ -52,32 +61,32 @@ class ExpSpenCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
-          children: const [
-            Text(
+          children: [
+            const Text(
               "Earned",
               style: TextStyle(fontSize: 12, color: Colors.white24),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
-              "+500",
-              style: TextStyle(fontSize: 20, color: Colors.green),
+              "+${Conversion.earn(ecoList)}",
+              style: const TextStyle(fontSize: 20, color: Colors.green),
             ),
           ],
         ),
         Column(
-          children: const [
-            Text(
+          children: [
+            const Text(
               "Spent",
               style: TextStyle(fontSize: 12, color: Colors.white24),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
-              "-500",
-              style: TextStyle(fontSize: 20, color: Colors.red),
+              "-${Conversion.exp(ecoList)}",
+              style: const TextStyle(fontSize: 20, color: Colors.red),
             ),
           ],
         ),

@@ -22,7 +22,7 @@ class HomeRootWidget extends StatelessWidget {
                 )
               : Column(
                   children: [
-                    const SavingsCard(),
+                    SavingsCard(ecoList: data),
                     Expanded(
                         child: TransactionListView(
                       list: data,
